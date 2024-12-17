@@ -1,29 +1,21 @@
 <div class="admin-page">
-    <div class="nav">
-    <div class="admin-nav">
-        <img src="img/menu.png" alt="menu">
-        <a (click)="register_component()" [ngClass]="{'active-link': register_cliked}">რეგისტრაცია</a>
-        <a (click)="category_component()" [ngClass]="{'active-link': category_cliked}">კატეგორიები</a>
-        <a (click)="doctor_component()" [ngClass]="{'active-link': doctors_clicked}">ექიმები</a>
-    </div>
-    <div class="nav-btn">
-        <button>ექიმი</button>
-        <button>მომხმარებელი</button>
-        <button>ადმინისტრატორი</button>             
-    </div>
-    </div>
+    <!-- Admin Navigation -->
+<app-admin-nav (navChange)="onNavChange($event)"></app-admin-nav>
+    <!-- Conditional Components -->
     <div *ngIf="doctors_clicked" class="other-component">
-    <app-category-list></app-category-list>
-    <app-doctors></app-doctors>
-    <div *ngIf="doctor_not_found" class="not-found">
-        <img src="img/PngItem_5585968.png" alt="not found">
-        <h1>ექიმი ამ სახელით ან სპეციალობით ვერ მოიძებნა</h1>   
-      </div>
-</div>
-<div *ngIf="category_cliked" >
-    <app-category></app-category>
-</div>
-<div *ngIf="register_cliked">
-    <app-doctor-register></app-doctor-register>
-</div>
+        <app-category-list (showMoreChange)="onShowMoreChange($event)"></app-category-list>
+        <app-doctors [show_more_btn]="show_more_btn"></app-doctors>
+        <div *ngIf="doctor_not_found" class="not-found">
+            <img src="img/PngItem_5585968.png" alt="not found">
+            <h1>ექიმი ამ სახელით ან სპეციალობით ვერ მოიძებნა</h1>
+        </div>
+    </div>
+
+    <div *ngIf="category_cliked">
+        <app-category></app-category>
+    </div>
+
+    <div *ngIf="register_cliked">
+        <app-doctor-register></app-doctor-register>
+    </div>
 </div>

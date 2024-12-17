@@ -20,6 +20,9 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { CategoryComponent } from './category/category.component';
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { DoctorEditpageComponent } from './doctor-edit-page/doctor-edit-page.component';
+import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { DoctorEditContainerComponent } from './doctor-edit-container/doctor-edit-container.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { authInterceptor } from './interceptors/auth.interceptor';
     UserProfileComponent,
     AdminPageComponent,
     DoctorsComponent,
-    CategoryComponent    
+    CategoryComponent,
+    DoctorEditpageComponent,
+    AdminNavComponent,
+    DoctorEditContainerComponent    
   ],
   imports: [
     BrowserModule,

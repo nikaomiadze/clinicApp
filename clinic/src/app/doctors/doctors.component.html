@@ -2,7 +2,7 @@
     <div class="doctors-container">
         <ul class="doctor-list">
             <div class="doctor">
-            <li class="doctor-li" *ngFor="let eactDoctor of doctors.doctorlist; let i = index">
+            <li class="doctor-li" *ngFor="let eactDoctor of doctors.doctorlist; let i = index" (click)="editDoctor(eactDoctor.id)">
               <img [src]="getImageSource(i)">
             <h1 class="username">{{eactDoctor.firstName}}
             {{eactDoctor.lastName}}

@@ -13,6 +13,7 @@ eachDoctor: any;
   constructor(public categories:CategoriesService,@Inject(PLATFORM_ID) private platformId: object,public doctors:DoctorService,private doctorState: DoctorStateService){}
   doctorPicture:string='';
   doctor_not_found:boolean=false;
+  show_more_btn:boolean=true;
 
   ngOnInit(): void {
         this.requestDoctors();
@@ -26,6 +27,7 @@ eachDoctor: any;
   requestDoctors(){
     this.doctors.get_doctor().subscribe({
       next:(res)=>{
+        this.show_more_btn=true;
         this.doctors.doctorlist=res;
         console.log('Doctors fetched successfully:', res);
         this.activeIndex=null;
@@ -41,6 +43,11 @@ eachDoctor: any;
     ? `data:image/png;base64,${doctor.picture}` 
     : 'img/pngegg.png'; // Fallback if no picture is available
   }
+  
+onShowMoreChange(value: boolean) {
+  this.show_more_btn = value; // Update the value of show_more_btn
+  console.log('Show More Button State in AdminPageComponent:', this.show_more_btn);
+}
   
 
 }

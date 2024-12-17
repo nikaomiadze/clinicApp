@@ -11,13 +11,14 @@ import { DoctorStateService } from '../doctor-state.service';
 export class CategoryListComponent implements OnInit {
   constructor(public categories:CategoriesService,public doctors:DoctorService,public doctorState:DoctorStateService){}
   eachDoctor: any;
-  @Output() show_more_btn: boolean = true; 
-    ngOnInit(): void {
+  @Output() showMoreChange = new EventEmitter<boolean>(); // Emit changes to show_more_btn
+
+  ngOnInit(): void {
     this.requestCategories();
   }
   onShowMoreChange(value: boolean) {
-    this.show_more_btn = value; // Update the value of show_more_btn
-    console.log('Show More Button State:', this.show_more_btn);
+    this.showMoreChange.emit(value); // Emit the updated value
+    console.log('Show More Button State:', value);
   }
   requestCategories(){
     this.categories.get_category().subscribe({
@@ -37,11 +38,7 @@ export class CategoryListComponent implements OnInit {
     const id = this.categories.catlist[index]?.id ?? 0;
     this.doctors.getDoctor_by_cat_id(id).subscribe({
       next:(res)=>{
-        if(res.length<6){
-          this.onShowMoreChange(false)
-        }else{
-          this.onShowMoreChange(true);
-        }
+        this.onShowMoreChange(res.length >= 6); // Update show_more_btn based on result length
         this.doctors.doctorlist=res;
         this.doctorState.setDoctorNotFound(false);
         console.log('Doctors fetched successfully:', res);

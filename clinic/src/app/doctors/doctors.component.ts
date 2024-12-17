@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { CategoriesService } from '../categories.service';
 import { DoctorService } from '../doctor.service';
 import { DoctorStateService } from '../doctor-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctors',
@@ -10,11 +11,14 @@ import { DoctorStateService } from '../doctor-state.service';
 })
 export class DoctorsComponent implements OnInit {
   eachDoctor: any;
-  constructor(public categories:CategoriesService,@Inject(PLATFORM_ID) private platformId: object,public doctors:DoctorService,private doctorState: DoctorStateService){}
+  constructor(public categories:CategoriesService,@Inject(PLATFORM_ID) private platformId: object,public doctors:DoctorService,private doctorState: DoctorStateService,private router: Router){}
   doctorPicture:string='';
   doctor_not_found:boolean=false;
-  @Input() show_more_btn: boolean = true;
-  ngOnInit(): void {
+  @Input() show_more_btn: boolean = true; // Receive value from AdminPageComponent
+
+  ngOnChanges() {
+    console.log('Show More Button State in DoctorsComponent:', this.show_more_btn);
+  }  ngOnInit(): void {
         this.requestDoctors();
         this.doctorState.doctorNotFound$.subscribe((status) => {
           this.doctor_not_found = status;
@@ -25,7 +29,7 @@ export class DoctorsComponent implements OnInit {
  requestDoctors() {
   this.doctors.get_doctor().subscribe({
     next: (res) => {
-      // Limit the doctor list to the first 6 items
+      this.show_more_btn=true;
       this.doctors.doctorlist = res.slice(0, 6);
       console.log('Doctors fetched successfully:', this.doctors.doctorlist);
       this.activeIndex = null;
@@ -40,6 +44,9 @@ export class DoctorsComponent implements OnInit {
     return doctor.picture 
     ? `data:image/png;base64,${doctor.picture}` 
     : 'img/pngegg.png'; // Fallback if no picture is available
+  }
+  editDoctor(doctorId: number | undefined) {
+    this.router.navigate(['/edit-doctor', doctorId]);
   }
   
 

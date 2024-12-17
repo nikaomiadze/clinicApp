@@ -7,11 +7,13 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { RoleGuard } from './role.guard';
+import { DoctorEditpageComponent } from './doctor-edit-page/doctor-edit-page.component';
 
 const routes: Routes = [
   {path:"user-register",component:UserRegisterComponent},
   {path:"",component:MainPageComponent},
   {path:"admin-page",component:AdminPageComponent,canActivate:[RoleGuard]},
+  {path: 'edit-doctor/:id', component: DoctorEditpageComponent },
   {path:"user-page",component:UserProfileComponent}
 
 ];

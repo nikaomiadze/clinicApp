@@ -7,31 +7,30 @@ import { DoctorStateService } from '../doctor-state.service';
   styleUrl: './admin-page.component.css'
 })
 export class AdminPageComponent implements OnInit {
-  doctor_not_found:boolean=false;
-  doctors_clicked:boolean=true;
-  category_cliked:boolean=false;
-  register_cliked:boolean=false;
-  constructor(public doctorState:DoctorStateService){}
+  doctor_not_found: boolean = false;
+  doctors_clicked: boolean = true;
+  category_cliked: boolean = false;
+  register_cliked: boolean = false;
+  show_more_btn: boolean = true;
+
+  constructor(public doctorState: DoctorStateService) {}
+
   ngOnInit(): void {
     this.doctorState.doctorNotFound$.subscribe((status) => {
       this.doctor_not_found = status;
-    });  
+    });
   }
-  
-  doctor_component(){
-   this.doctors_clicked=true;
-   this.category_cliked=false;
-   this.register_cliked=false;
-}
-category_component(){
-  this.category_cliked=true;
-  this.doctors_clicked=false;
-  this.register_cliked=false;
-}
-register_component(){
-  this.register_cliked=true;
-  this.doctors_clicked=false;
-  this.category_cliked=false;
-}
+
+  // Handle navigation changes
+  onNavChange(tab: string) {
+    this.doctors_clicked = tab === 'doctors';
+    this.category_cliked = tab === 'category';
+    this.register_cliked = tab === 'register';
+  }
+
+  onShowMoreChange(value: boolean) {
+    this.show_more_btn = value;
+    console.log('Show More Button State in AdminPageComponent:', this.show_more_btn);
+  }
 
 }

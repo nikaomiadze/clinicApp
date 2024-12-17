@@ -1,0 +1,9 @@
+<div class="main-page">
+  <div class="category-list"><app-category-list></app-category-list></div>
+    <div class="doctors-list"><app-doctors></app-doctors></div>
+    <div *ngIf="doctor_not_found" class="not-found">
+      <img src="img/PngItem_5585968.png" alt="not found">
+      <h1>ექიმი ამ სახელით ან სპეციალობით ვერ მოიძებნა</h1>   
+    </div>
+</div>
+  

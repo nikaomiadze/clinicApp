@@ -1,0 +1,29 @@
+<div class="contact-bar">
+    <div class="contact-info">
+      <!-- Phone Section -->
+      <div class="contact-item">
+        <button class="phone">
+        <img src="img/call-svgrepo-com (3) 1.png" alt="კლინიკა" class="logo-image" />
+        </button>
+        <span>032 2 100 100</span>
+      </div>
+  
+      <!-- Location Section -->
+      <div class="contact-item">
+        <button class="address">
+        <img src="img/location-svgrepo-com (1) 2.png" alt="კლინიკა" class="logo-image" />
+        </button>
+        <span>იაკობ ნიკოლაძის №10</span>
+      </div>
+    </div>
+  
+    <!-- Search Section -->
+    <div class="search-section">
+      <input [(ngModel)]="searchQuery.username" type="text" placeholder="მოძებნე ექიმი სახელით" class="search-input" />
+      <input [(ngModel)]="searchQuery.category_name" type="text" placeholder="მოძებნე სპეციალობით" class="search-input" />
+      <button (click)="search_doctor()"  class="search-btn">
+        <img src="img/ri_search-line.png" alt="კლინიკა" class="logo-image" />
+      </button>
+    </div>
+  </div>
+  

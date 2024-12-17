@@ -1,0 +1,35 @@
+<div class="category-component">
+    <h1 class="component-title">კატეგორიები</h1>
+    <div class="table-container">
+<table>
+    <thead>
+        <tr>
+            <th>სახელი</th>
+            <th>კატეგორია</th>
+            <th class="photo">ფოტოსურათი</th>
+            <th class="review">რეიტინგი</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let eactDoctor of doctors.doctorlist; let i = index">
+            <td>{{eactDoctor.firstName}} {{eactDoctor.lastName}}</td>
+            <td>{{eactDoctor.category_name}}</td>
+            <td class="doctors-img"><img class="profile-img" [src]="getImageSource(i)"></td>
+            <td class="doctors-review"><div class="star-rating">
+                <!-- Full Stars -->
+                <i *ngFor="let star of [].constructor(eactDoctor.doctor_review)" class="fas fa-star"></i>
+                <!-- Empty Stars -->
+                <i *ngFor="let emptyStar of [].constructor(5 - (eactDoctor.doctor_review || 0))" class="far fa-star"></i>
+              </div></td>
+            <td class="buttons-td">
+                <div class="buttons">
+                    <div><button class="edit-btn"><img src="img/edit-icon.png" alt="edit-icon"></button></div>
+                    <div><button class="delete-btn" (click)="delete_doctor(eactDoctor.id)"><img src="img/delete-icon.png" alt="delete-icon"></button></div>
+            </div>
+        </td>
+        </tr>
+    </tbody>
+</table>
+    </div>
+</div>

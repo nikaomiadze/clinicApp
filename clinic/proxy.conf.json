@@ -1,0 +1,9 @@
+{ 
+"/get_category": {
+    "target": "https://localhost:7082",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+  

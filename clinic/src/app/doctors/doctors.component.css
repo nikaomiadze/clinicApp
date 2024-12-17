@@ -1,0 +1,120 @@
+.doctors-container{
+    margin-bottom: 104px;
+}
+
+.doctor-list{
+    padding-left: 0px;
+    margin-left: 104px;
+    padding: 0px;
+    margin-top: 0px;
+
+  }
+  .username{
+  color: #053354;
+  font-family: FiraGO;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  }
+  .doctor-category{
+  color: rgba(5, 51, 84, 0.30);
+  font-family: FiraGO;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  }
+  .doctor{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    text-align: center;
+    margin-top: 0px;
+    height: 100%;
+
+  }
+  .doctor-li{
+  width: 390px;
+  height: 387px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(24, 164, 225, 0.30);
+  background: #FFF;
+  box-shadow: 0px 4px 30px 0px rgba(5, 51, 84, 0.05);
+
+  }
+  .doctor-li img{
+    width: 157px;
+    height: 157px;
+    margin-top: 31px;
+    border-radius: 157px;
+  }
+  .star-rating {
+    display: flex;
+    gap: 5px; /* Space between stars */
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  .star-rating i {
+    font-size: 20px; /* Adjust star size */
+    color: #ffd700; /* Gold for filled stars */
+  }
+  
+  .star-rating .far {
+    color: #ccc; /* Gray for empty stars */
+  }
+ .booking-btn{
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #ECF2F8;
+    cursor: pointer;
+    border: 1px solid;
+    margin-top: 22px;
+    font-family: FiraGO;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .booking-btn:hover{
+    border: 1px solid rgba(24, 164, 225, 0.30);
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(5, 51, 84, 0.05);
+    color: #18A4E1;
+    font-family: firago;
+    font-size: 16px;
+    filter: none;
+  }
+  .booking-btn img{
+    width: 16px;
+    height: 16px;
+    margin: 0px;
+    rotate: -90deg;
+    filter: brightness(0) saturate(100%) invert(15%) sepia(60%) saturate(1205%) hue-rotate(170deg) brightness(95%) contrast(98%);
+  }
+  .show-more{
+    display: flex;
+    justify-content: flex-end;
+    background: none;
+    border: 0px;
+  }
+  .show-more button{
+    background: none;
+    border: 0px;
+    color: #053354;
+    font-family: 'FiraGO';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    margin-right: 90px;
+  }
+  .show-more svg{
+    padding-left: 54px;
+  }

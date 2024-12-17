@@ -1,0 +1,30 @@
+.main-page{
+  display: flex;
+  margin: 0px;
+  padding-top: 41px;
+}
+.category-list{
+  margin-left: 150px;
+}
+ 
+  .not-found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px; /* Ensure the parent container has a defined height */
+    text-align: center;
+    gap: 40px;
+    padding-left: 100px;
+    
+    
+  }
+  .not-found img{
+    width: 60px;
+    height: 60px;
+  }
+  .not-found h1{
+    font-family: FiraGO;
+    text-align: center;
+    margin: 0px;
+  }
+ 

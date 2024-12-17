@@ -1,0 +1,37 @@
+<!-- header.component.html -->
+<header>
+  <div class="logo">
+      <img src="img/logo.png" alt="Logo" >
+      <span>კლინიკა</span>
+  </div>
+  <nav>
+      <ul>
+          <li><a routerLink="/">ექიმები</a></li>
+          <li><a href="#">კლინიკები</a></li>
+          <li><a href="#">ანოტაციები</a></li>
+          <li><a href="#">ქეისები</a></li>
+          <li><a href="#">სერვისები</a></li>
+          <li><a href="#">მედიკამენტები</a></li>
+          <li><a href="#">კონტაქტი</a></li>
+      </ul>
+  </nav>
+  <div class="user-info"  *ngIf="isLoggedIn">
+    <button (click)="open_profile()" class="user" ><img class="profile-img" [src]="getImageSource()">
+  <div class="username">
+    {{ userFirstName }} {{ userLastName }}
+  </div>
+    </button>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+    <button class="change-language">ENG</button>
+  </div>
+<div class="auth"  *ngIf="!isLoggedIn" >
+  <div class="auth-btn-div">
+    <button class="authorization" (click)="openLoginModal()">ავტორიზაცია</button> 
+    <span> / </span>
+    <button class="register" routerLink="/user-register">რეგისტრაცია</button>   
+  </div>   
+    <button  class="change-language">ENG</button>
+  </div>
+</header>
+<app-login *ngIf="isModalOpen" (close)="closeLoginModal()"></app-login>
+

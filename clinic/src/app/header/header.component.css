@@ -1,0 +1,142 @@
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-decoration: none;
+  padding-left: 150px;
+}
+
+.logo img {
+  width: 60px;
+  height: 66px;
+  flex-shrink: 0;
+  margin-right: 5px;
+  background: none;
+}
+.logo span{
+  color: #FF2C52;
+  font-family: FiraGO;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.54px;
+  margin-left: - 20px;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-weight: 400;
+
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  margin-right: 150px;
+}
+
+.logout-btn,.change-language{
+  width: 80px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  background: #F0FAFF;
+  border: 0px;
+  margin-left: 10px;
+  font-weight: 400;
+ 
+}
+.user-info{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 50px; 
+    margin-right: 150px;  
+  }
+  .username{
+    padding-right: 26px;
+  }
+.user{
+width: auto;
+height: 45px;
+flex-shrink: 0;
+border-radius: 25px;
+background: #F0FAFF;
+font-family: FiraGO;
+border: 0px;
+align-items: center;
+display: flex;
+gap: 21px; 
+border: none;
+cursor: pointer;
+font-size: 16px;
+font-weight: 400;
+color: #0078d4; 
+ white-space: nowrap; 
+}
+.user-info :hover{
+  background-color: #fff;
+  color: black;
+}
+
+.profile-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%; 
+  object-fit: cover;
+  border: 2px solid #ffffff; 
+}
+
+.auth span{
+    margin: 0 8px; 
+    font-weight: 400;
+  }
+.auth-btn-div button {
+  background: none;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
+}
+.auth-btn-div{
+width: 280px;
+height: 45px;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 25px;
+background: #F0FAFF;
+}
+.auth button:hover{
+  cursor: pointer;
+}
+.authorization{
+color: #18A4E1;
+font-family: FiraGO;
+}
+.register{
+  color: #053354;
+font-family: FiraGO;
+}

@@ -1,0 +1,19 @@
+<div class="modal-overlay" (click)="closeModal()" >
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeModal()">×</button>
+
+      <h2>ავტორიზაცია</h2>
+      <form [formGroup]="loginForm"  (ngSubmit)="Login_user()" >
+        <input type="email"  name="email" placeholder="შეიყვანეთ ელ. ფოსტა ან ნომერი" formControlName="email" /> 
+        <input type="password"  name="password" placeholder="შეიყვანეთ პაროლი" formControlName="password" /> 
+        <br>
+        <small *ngIf="incorectdata" class="error-text">*არასწორი ელ. ფოსტა ან პაროლი</small>      
+      <div class="forgot-pass">
+      <a href="#">პაროლის აღდგენა</a>
+    </div>
+  
+        <button type="submit" class="submit-btn">შესვლა</button>
+      </form>
+    </div>
+  </div>
+  

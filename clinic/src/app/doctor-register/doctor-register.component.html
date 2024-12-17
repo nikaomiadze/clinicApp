@@ -1,0 +1,104 @@
+<div id="doctor-register" class="doctor-register">
+  <div class="container">
+    <h2>რეგისტრაცია</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="Add_Doctor()">
+      <div class="form-row">
+        <!-- First Column -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="name">სახელი</label>
+            <input
+              type="text"
+              id="firstname"
+              name="first_name"
+              formControlName="firstname"
+              placeholder="მინიმუმ 5 სიმბოლო"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="surname">გვარი</label>
+            <input
+              type="text"
+              id="lastname"
+              name="last_name"
+              formControlName="lastname"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="photo">ფოტოს ატვირთვა</label>
+            <input
+              type="file"
+              id="photo"
+              name="profile_img"
+              (change)="onPictureSelected($event)"
+            />
+          </div>
+        </div>
+
+        <!-- Second Column -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">პაროლი</label>
+            <input
+              type="password"
+              id="password"
+              name="Password"
+              formControlName="password"
+              placeholder="მინიმუმ 8 სიმბოლო"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="cv">CV</label>
+            <input
+              type="file"
+              id="cv"
+              name="cv"
+              (change)="onCvSelected($event)"
+            />
+          </div>
+        </div>
+
+        <!-- Third Column -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="phone">პირადი ნომერი</label>
+            <input
+              type="text"
+              id="person_id"
+              formControlName="person_id"
+              name="person_id"
+              placeholder="0000000000"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="category">კატეგორია</label>
+            <select type="category"
+               formControlName="category_id" (click)="requestCategories()">
+               <option *ngFor="let eachCategory of categories.catlist" [value]="eachCategory.id">
+              {{eachCategory.category_name}}</option>
+    </select>
+          </div>
+
+          <div class="form-group submit-button">
+            <button type="submit" [disabled]="!registerForm.valid">
+              რეგისტრაცია
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

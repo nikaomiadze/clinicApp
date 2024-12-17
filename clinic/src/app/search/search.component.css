@@ -1,0 +1,98 @@
+/* Main container */
+.contact-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f9ff;
+    border-bottom: 1px solid #ddd;
+    width: auto;
+    height: 120px;
+    
+
+  }
+  
+  /* Contact Info Section */
+  .contact-info {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    align-content: center;
+    margin-left: 150px;
+  }
+  .phone{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+  }
+  
+  .contact-item {
+    color: #053354;
+    font-family: FiraGO;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+  }
+  .contact-item span{
+    margin-left: 9px;
+    margin-bottom: 52px;
+    color: #053354;
+
+  }
+  .phone{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color:#FFF ;
+    border: 0px solid;
+  }
+  .address{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color:#FFF ;
+    border: 0px solid;
+  }
+  
+  .search-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 150px;
+  }
+  
+  .search-input {  
+    width: 480px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    border: 1px solid rgba(24, 164, 225, 0.50);
+    background: #FFF;
+    padding-left: 30px;
+    color: rgba(5, 51, 84, 0.30);
+    font-family: FiraGO;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  .search-btn {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color:#053354 ;
+    border: 0px solid;
+  }
+  
+  .search-btn i {
+    font-size: 16px;
+  }
+  
+  .search-btn:hover {
+    background-color: #0056b3;
+  }
+  

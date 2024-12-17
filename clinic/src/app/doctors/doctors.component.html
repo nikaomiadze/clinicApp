@@ -1,0 +1,32 @@
+<div class="docors-component">
+    <div class="doctors-container">
+        <ul class="doctor-list">
+            <div class="doctor">
+            <li class="doctor-li" *ngFor="let eactDoctor of doctors.doctorlist; let i = index">
+              <img [src]="getImageSource(i)">
+            <h1 class="username">{{eactDoctor.firstName}}
+            {{eactDoctor.lastName}}
+            </h1>
+            <h1 class="doctor-category">{{eactDoctor.category_name}}</h1>
+            <div class="star-rating">
+              <!-- Full Stars -->
+              <i *ngFor="let star of [].constructor(eactDoctor.doctor_review)" class="fas fa-star"></i>
+              <!-- Empty Stars -->
+              <i *ngFor="let emptyStar of [].constructor(5 - (eactDoctor.doctor_review || 0))" class="far fa-star"></i>
+            </div>
+            <button class="booking-btn">მიღება ჩაწერაზე <img src="img/material-symbols_arrow-back-ios-rounded.png" alt="arrow">
+            </button>
+            </li>
+            </div>
+          </ul>
+          <div *ngIf="show_more_btn" class="show-more">
+            <div>
+            <button>სრულად ნახვა</button>
+            <br>
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="2" viewBox="0 0 80 2" fill="none">
+                <path d="M0 1H80" stroke="#18A4E1"/>
+              </svg>
+          </div>
+    </div>
+
+</div>

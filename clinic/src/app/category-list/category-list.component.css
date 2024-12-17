@@ -1,0 +1,116 @@
+.category-container{
+    width: 350px;
+    height: 800px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 4px 50px 0px rgba(5, 51, 84, 0.05);
+    /* margin-left: 150px; */
+    padding-left: 0px;
+    
+}
+.category-title{
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    margin: 0px;
+    color: #053354;
+    font-family: FiraGO;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+}
+.all-category{
+    cursor: pointer;
+    justify-content: space-evenly;
+    color: #053354;
+    font-family: FiraGO;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+   
+}
+.category-list{
+    padding: 0px;
+    display: block;   
+    justify-content: space-evenly; 
+}
+.category-list span{
+    color: rgba(5, 51, 84, 0.30);
+    font-family: FiraGO;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-right: 15px;
+}  
+.all-doctor-btn{
+    width: 350px;
+    height: 40px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 18px;  
+    color: #053354;
+ 
+}
+.all-doctor-btn:hover{
+  background-color: #f0f0f0;
+}
+.show-more {
+    margin-top: 15px;
+    width: auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+.show-more button{
+  padding: 10px;
+    font-size: 16px;
+    color: #18A4E1;
+    border: none;
+    cursor: pointer;
+    background: none;
+    text-align: center;
+    
+}
+.show-more img{
+  width: 16px;
+height: 16px;
+flex-shrink: 0;
+}
+  
+  .show-more:hover {
+    color: #0056b3;
+  }
+  .category-item{
+    height: 40px;
+    flex-shrink: 0;
+    list-style: none;
+    padding-left: 80px;
+    align-content: center;
+  }
+  .category-item button{
+   width: 350px;
+    background: none;
+  }
+  .category-item:hover {
+    background-color: #f0f0f0;
+  }
+  .category-item.active {
+    background: rgba(236, 242, 248, 0.50);
+    width: 270px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  .line {
+    margin-top: 10px;
+    border-top: 1px solid  #ECF2F8;
+    width: 250px;
+    margin-left: 50px;
+  }

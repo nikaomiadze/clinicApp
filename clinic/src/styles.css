@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'FiraGO';
+    src: url('../public/assets/fonts/FiraGO-Regular.woff2') format('woff2'),
+         url('../public/assets/fonts/FiraGO-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  body {
+    font-family: 'FiraGO';
+  }

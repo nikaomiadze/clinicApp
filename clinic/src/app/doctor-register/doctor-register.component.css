@@ -1,0 +1,113 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    color: #18A4E1;
+    font-family: FiraGO;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .form-column {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  select option{
+    padding: 10px; /* Padding inside each option */
+    font-size: 16px; /* Font size */
+    background-color: #fff; /* Background color */
+    color: #053354; 
+  }
+  select option:hover {
+    background-color: #f0f8ff; /* Highlight color */
+    color: #000; /* Text color on hover */
+  }
+  select::after {
+    content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-top-color: #053354;
+  pointer-events: none;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="file"],
+  .form-group select {
+    width: 380px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    border: 1px solid #ECF2F8;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="file"]:focus, 
+  .form-group select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  button {
+    width: 180px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: #053354;
+    color: #FFF;
+    font-family: FiraGO;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    align-self: flex-end;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .submit-button {
+    margin-top: 30px;
+  }
+  .button:disabled{
+    background-color: #ccc;
+    
+  }
+  

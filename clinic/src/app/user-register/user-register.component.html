@@ -1,0 +1,46 @@
+<div id="user-register" class="user-register">
+  <div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="Add_User()">
+      <h1 class="form-title">რეგისტრაცია</h1>
+    <div class="form-row">
+      <div class="form-group">
+        <label>სახელი</label>
+        <input type="text" placeholder="მინიმუმ 5 სიმბოლო"  name="firstname"  formControlName="firstname"/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <div class="input-with-icon">
+          <input type="email" name="email" formControlName="email"/>
+          <button type="button" (click)="sendcode()" class="email-icon">
+            <img src="img/mail-right-arrow-svgrepo-com 1.png" alt="mail"/>          
+          </button>
+          <small *ngIf="email_error" class="error-text">*მომხმარებელი ამ ელ. ფოსტით უკვე არსებობს.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>პირადი ნომერი</label>
+        <input type="text" placeholder="00000000000" name="person_id" formControlName="person_id"  />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>გვარი</label>
+        <input type="text" name="lastname" formControlName="lastname" />
+      </div>
+      <div class="form-group">
+        <label>აქტივაციის კოდი</label>
+        <input type="text"   name="verificationcode" formControlName="verificationcode"/>
+        <small *ngIf="code_error" class="error-text">*ბმულის მოქედების ვადა ამოიწურა</small>
+      </div>
+      <div class="form-group">
+        <label>პაროლი</label>
+        <input type="password" placeholder="მინიმუმ 8 სიმბოლო: @, !" name="password" formControlName="password"  />
+      </div>
+    </div>
+    <div class="btn">
+        <button type="submit" class="button" [disabled]="!registerForm.valid">რეგისტრაცია</button>
+    </div>
+</form>
+  </div>
+</div>
+

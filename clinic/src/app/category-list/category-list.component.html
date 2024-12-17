@@ -1,0 +1,25 @@
+<div class="category-component">
+    <div class="category-container">
+        <h3 class="category-title">კატეგორიები</h3>
+        <div class="line"></div>
+    
+        <div class="all-category">
+          <ul id="categoryList" class="category-list">
+            <button class="all-doctor-btn" (click)="requestDoctors()">ყველა</button>
+            <li 
+              *ngFor="let eachCategory of categories.catlist; let i = index"
+              [class.active]="activeIndex === i"
+              (click)="get_doctor_by_cat(i)"
+              class="category-item"
+            >
+              <span>({{ eachCategory.category_count }})</span>
+              {{ eachCategory.category_name }}
+            </li>
+          </ul>
+          <div class="line"></div>
+        </div>
+        <div class="show-more" ><button>სრულიად ნახვა</button>
+          <img src="img/material-symbols_arrow-back-ios-rounded.png" alt="arrow">
+        </div>
+      </div>
+</div>

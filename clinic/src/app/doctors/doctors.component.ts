@@ -14,6 +14,7 @@ export class DoctorsComponent implements OnInit {
   constructor(public categories:CategoriesService,@Inject(PLATFORM_ID) private platformId: object,public doctors:DoctorService,private doctorState: DoctorStateService,private router: Router){}
   doctorPicture:string='';
   doctor_not_found:boolean=false;
+  fullDoctorList: any[] = []; 
   @Input() show_more_btn: boolean = true; // Receive value from AdminPageComponent
 
   ngOnChanges() {
@@ -30,6 +31,7 @@ export class DoctorsComponent implements OnInit {
   this.doctors.get_doctor().subscribe({
     next: (res) => {
       this.show_more_btn=true;
+      this.fullDoctorList = res;
       this.doctors.doctorlist = res.slice(0, 6);
       console.log('Doctors fetched successfully:', this.doctors.doctorlist);
       this.activeIndex = null;
@@ -38,6 +40,10 @@ export class DoctorsComponent implements OnInit {
       console.error('Error in requestDoctors():', err);
     }
   });
+}
+showMoreDoctors() {
+  this.doctors.doctorlist = this.fullDoctorList; // Display the full list
+  this.show_more_btn = false; // Hide the "Show More" button
 }
   getImageSource(index: number): string {
     const doctor = this.doctors.doctorlist[index];

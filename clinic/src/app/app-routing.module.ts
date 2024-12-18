@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:"user-register",component:UserRegisterComponent},
   {path:"",component:MainPageComponent},
   {path:"admin-page",component:AdminPageComponent,canActivate:[RoleGuard]},
-  {path: 'edit-doctor/:id', component: DoctorEditpageComponent },
+  {path: 'edit-doctor/:id', component: DoctorEditpageComponent,canActivate:[RoleGuard] },
   {path:"user-page",component:UserProfileComponent}
 
 ];

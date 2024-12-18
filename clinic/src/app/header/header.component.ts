@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { DoctorService } from '../doctor.service';
 
 @Component({
   selector: 'app-header',
@@ -17,22 +18,44 @@ export class HeaderComponent implements OnInit {
   private token:any=localStorage.getItem('accessToken');
 
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router,private doctorService:DoctorService) {}
 
   ngOnInit(): void {
-    this.userService.currentUserData.subscribe((userData) => {
-      if (userData) {
-        this.isLoggedIn = true;
-        this.userFirstName = userData.firstName;
-        this.userLastName = userData.lastName;
-        this.userPicture = userData.picture;
-      } else {
-        this.isLoggedIn = false;
-        this.userFirstName = '';
-        this.userLastName = '';
+    if(this.token){
+      const role_id = parseInt(this.getUserRole_idFromToken(this.token)!, 10);
+      if(role_id===1||role_id===3){
+        this.userService.currentUserData.subscribe((userData) => {
+          if (userData) {
+            this.isLoggedIn = true;
+            this.userFirstName = userData.firstName;
+            this.userLastName = userData.lastName;
+            this.userPicture = userData.picture;
+          } else {
+            this.isLoggedIn = false;
+            this.userFirstName = '';
+            this.userLastName = '';
+          }
+        });
+        this.userService.loadUserInfo();
+      } else if(role_id===2){
+        this.doctorService.currentdoctorData.subscribe((doctorData)=>{
+          if (doctorData) {
+            this.isLoggedIn = true;
+            this.userFirstName = doctorData.firstName;
+            this.userLastName = doctorData.lastName;
+            this.userPicture = doctorData.picture;
+          } else {
+            this.isLoggedIn = false;
+            this.userFirstName = '';
+            this.userLastName = '';
+          }
+        });
+        this.doctorService.loadUserInfo();
+      }else{
+        console.error("invalid user_id")
       }
-    });
-    this.userService.loadUserInfo();
+    }
+    
   }
   getImageSource(): string {
     return this.userPicture
@@ -63,6 +86,8 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/admin-page']);
       } else if (role_id === 1) {
         this.router.navigate(['/user-profile']);
+      }else if(role_id===2){
+        this.router.navigate(['/doctor-page']);
       }
     } else {
       console.error('Token is not available.');

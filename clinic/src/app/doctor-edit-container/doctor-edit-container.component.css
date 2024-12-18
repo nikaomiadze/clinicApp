@@ -1,0 +1,127 @@
+.doctor-info{
+    width: 750px;
+    height: 315px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(5, 51, 84, 0.05);
+    display: flex;
+    gap: 43px;
+}
+.doctor-card{
+    width: 207px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    margin-left: 37px;
+    gap: 10px;
+}
+.username-category{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.username{
+    color: #18A4E1;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.doctor-img img{
+    width: 157px;
+    height: 157px;
+    border-radius: 157px;
+}
+.doctor-category{
+    color: rgba(5, 51, 84, 0.30);
+font-family: FiraGO;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+}
+h1{
+    color: #053354;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0px;
+}
+.category-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.star-rating {
+    display: flex;
+    gap: 5px; /* Space between stars */
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  .star-rating i {
+    font-size: 20px; /* Adjust star size */
+    color: #ffd700; /* Gold for filled stars */
+  }
+  
+  .star-rating .far {
+    color: #ccc; /* Gray for empty stars */
+  }
+  .edit-labels{
+    display: flex;
+    flex-direction: column;
+    gap: 41px;
+    padding-top: 49px;
+  }
+  .edit-labels button{
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: 0px;
+    cursor: pointer;
+  }
+  .edit-label{
+    display: flex;
+    gap: 12px;
+  }
+  .label{
+    padding-top: 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+  }
+  .booking-count{
+    padding-top: 9px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .api-info{
+    color: rgba(5, 51, 84, 0.30);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .label-title{
+    color: #053354;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .row{
+    display: flex;
+    gap: 45px
+  }
+  

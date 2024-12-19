@@ -23,4 +23,17 @@ export class AdminService {
       })
   );
   }
+  Update_doctor(doctor_id:string,newData:FormData):Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({ 'enctype': 'multipart/form-data' }),
+       responseType: 'text' as 'json'
+    };
+    return this.http.post<any>(`https://localhost:7082/update_doctor/${doctor_id}`,newData,httpOptions)
+    .pipe(
+      catchError((error) => {
+          console.error('Error occurred while updating the employee:', error);
+          return throwError(() => new Error('Failed to update employee. Please try again later.'));
+      })
+  );
+  }
 }

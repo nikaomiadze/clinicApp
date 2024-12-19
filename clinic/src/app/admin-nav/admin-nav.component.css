@@ -2,6 +2,8 @@
     display: flex;
     gap:20px;
     margin-top: 45px;
+    margin-right: 150px;
+    justify-content: center;
 }
 .admin-nav{
     width: 480px;

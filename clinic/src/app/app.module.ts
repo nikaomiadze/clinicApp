@@ -23,6 +23,7 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 import { DoctorEditpageComponent } from './doctor-edit-page/doctor-edit-page.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { DoctorEditContainerComponent } from './doctor-edit-container/doctor-edit-container.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DoctorEditContainerComponent } from './doctor-edit-container/doctor-edi
     CategoryComponent,
     DoctorEditpageComponent,
     AdminNavComponent,
-    DoctorEditContainerComponent    
+    DoctorEditContainerComponent,
+    CalendarComponent    
   ],
   imports: [
     BrowserModule,

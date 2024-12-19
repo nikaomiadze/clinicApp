@@ -1,0 +1,255 @@
+.calendar-container {
+    text-align: center;
+    width: 830px;
+    max-height: 758px;
+  }
+  .month_year{
+    display: flex;
+    align-items: center;
+    margin-left: 49px;
+    gap: 41px;
+  }
+  .year{
+    margin-top: 6px;
+    color: #053354;
+    font-family: FiraGO;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .month{
+    display: flex;
+    gap: 10px;
+  }
+  .month h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    border: 1px solid rgba(24, 164, 225, 0.30);
+    color: #18A4E1;
+    font-family: FiraGO;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .month button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    background-color: #FFF;
+    box-shadow: 0px 4px 10px rgba(5, 51, 84, 0.1);
+    border-radius: 50%;
+    border: 0px;
+    cursor: pointer;
+
+  }
+  .week_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .week_btn div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .week_btn button{
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: none;
+    border: 0px;
+    cursor: pointer;
+  }
+  .week_btn button svg{
+    display: block;
+  }
+  .week_btn button:hover{
+    background-color: #FFF;
+  }
+  .calendar-table {
+    width: 830px;
+    height: 587px;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(5, 51, 84, 0.05);
+    border: none;
+    border-radius: 10px; /* Adjust the radius value as needed */
+    overflow: hidden;
+  }
+  .calendar-table thead{
+    background-color: #ECF2F8;
+    border-radius: 10px 10px 0px 0px;
+    height: 48px;
+    border-radius: 100px;
+  }
+  .day_number{
+    color: #18A4E1;
+    text-align: center;
+    font-family: FiraGO;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .day_name{
+    color: #053354;
+    font-family: FiraGO;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .calendar-table tbody{
+    border: none;
+  }
+  
+  .calendar-table th,
+  .calendar-table td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .calendar-table th {
+    font-weight: bold;
+    width: 100px;
+    border: none;
+    
+  }
+  .calendar-table td:last-child {
+    border-right: none;
+  }
+  .calendar-table tr:last-child td {
+    border-bottom: none;
+  }
+  .calendar-table td {
+    width: 100px;
+    height: 60px;
+    padding: 0px;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;;
+
+  }
+  .booking-btn{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #FFF;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgba(5, 51, 84, 0.30);
+    font-family: FiraGO;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .booking-btn:hover{
+    background: #ccc;
+  }
+  .past-date {
+    color: gray;
+    opacity: 0.6;
+  }
+  .modal {
+    position: absolute;
+    width: 420px;
+    height: 263px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(5, 51, 84, 0.20);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 13px;
+    margin: 25px 32px 20px 31px;
+   
+  }
+  .modal-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 13px;
+  }
+  h3{
+    color: #3ACF99;
+    font-family: FiraGO;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  label{
+    color: #053354;
+    font-family: FiraGO;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .textarea{
+    width: 355px;
+    height: 88px;
+    padding: 0px;
+    }
+  
+  .textarea textarea {
+    width: 100%;
+    height: 88px;
+    flex-shrink: 0;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid #ECF2F8;
+    padding: 0px;
+  }
+  .textarea textarea ::-webkit-input-placeholder{
+    padding: 10px;
+  }
+  .booking-button{
+    display: flex;
+    justify-content: flex-end;
+  }
+  button {
+    width: 170px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: #3ACF99;
+    border: 0px;
+    color: #FFF;
+    font-family: FiraGO;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .modal-content h3{
+    margin: 0px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

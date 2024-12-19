@@ -1,7 +1,54 @@
-.edit_doctor_page{
+/* Original styles */
+.edit_doctor_page {
     padding-left: 150px;
-} 
-.page-container{
+  }
+  .page-container {
     padding-top: 63px;
-
-}
+    display: flex;
+    gap: 41px;
+  }
+  .doctor-edit-component {
+    margin-top: 103px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 1024px) {
+    .edit_doctor_page {
+      padding-left: 100px; /* Reduce left padding on medium screens */
+    }
+    .page-container {
+      flex-direction: column; /* Stack elements vertically */
+      padding-top: 30px;
+      gap: 30px;
+    }
+    .doctor-edit-component {
+      margin-top: 30px; /* Reduce top margin */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .edit_doctor_page {
+      padding-left: 50px; /* Further reduce left padding */
+    }
+    .page-container {
+      gap: 20px; /* Reduce gap between elements */
+      padding: 20px; /* Add padding for smaller screens */
+    }
+    .doctor-edit-component {
+      margin-top: 20px; /* Adjust top margin */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .edit_doctor_page {
+      padding-left: 10px; /* Minimal padding for mobile devices */
+    }
+    .page-container {
+      gap: 10px; /* Minimized gap for compact screens */
+      padding: 10px;
+    }
+    .doctor-edit-component {
+      margin-top: 10px; /* Further reduce top margin */
+    }
+  }
+  

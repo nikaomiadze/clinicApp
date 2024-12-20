@@ -24,6 +24,7 @@ import { DoctorEditpageComponent } from './doctor-edit-page/doctor-edit-page.com
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { DoctorEditContainerComponent } from './doctor-edit-container/doctor-edit-container.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { BookingPageComponent } from './booking-page/booking-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     DoctorEditpageComponent,
     AdminNavComponent,
     DoctorEditContainerComponent,
-    CalendarComponent    
+    CalendarComponent,
+    BookingPageComponent    
   ],
   imports: [
     BrowserModule,

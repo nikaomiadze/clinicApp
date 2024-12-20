@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit{
               next: (userDetails) => {
                 console.log("User Details:", userDetails);
                 this.userservice.setUserData({
+                  id:userDetails.id,
                   firstName: userDetails.firstName,
                   lastName: userDetails.lastName,
                   picture: userDetails.picture,
@@ -69,6 +70,7 @@ export class LoginComponent implements OnInit{
               next: (doctorDetails) => {
                 console.log("Doctor Details:", doctorDetails);
                 this.userservice.setUserData({
+                  id:doctorDetails.id,
                   firstName: doctorDetails.firstName,
                   lastName: doctorDetails.lastName,
                   picture: doctorDetails.picture,
@@ -83,6 +85,7 @@ export class LoginComponent implements OnInit{
               next: (userDetails) => {
                 console.log("User Details:", userDetails);
                 this.userservice.setUserData({
+                  id:userDetails.id,
                   firstName: userDetails.firstName,
                   lastName: userDetails.lastName,
                   picture: userDetails.picture,

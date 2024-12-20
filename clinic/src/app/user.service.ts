@@ -10,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class UserService{
-  private userData = new BehaviorSubject<{ firstName: string; lastName: string; picture: string } | null>(null);
+  private userData = new BehaviorSubject<{id: number; firstName: string; lastName: string; picture: string } | null>(null);
   currentUserData = this.userData.asObservable(); // Observable for other components
   private tokenkey:any=localStorage.getItem('accessToken');
   
@@ -66,6 +66,7 @@ export class UserService{
           this.getUserById(userId).subscribe({
             next: (userDetails) => {
               const userInfo = {
+                id: userDetails.id,
                 firstName: userDetails.firstName,
                 lastName: userDetails.lastName,
                 picture: userDetails.picture,
@@ -92,7 +93,7 @@ export class UserService{
     return this.http.get<any>(`https://localhost:7082/user/${userId}`);
   }
 
-  setUserData(data: { firstName: string; lastName: string;  picture: string;}): void {
+  setUserData(data: {id:number; firstName: string; lastName: string;  picture: string;}): void {
     this.userData.next(data);
   }
   // Clear user data on logout

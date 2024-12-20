@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from '../token.service';
+import { BookingService } from '../booking.service';
+import { ActivatedRoute } from '@angular/router';
+import { booking } from '../models/booking';
+import { UserService } from '../user.service';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-calendar',
@@ -6,10 +12,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+  constructor(private tokenService:TokenService,private bookinService:BookingService,private route:ActivatedRoute,private userService:UserService){}
   ngOnInit(): void {
   this.updateCalendar();
   this.generateCurrentWeek();
+  this.tokenService.roleId$.subscribe(roleId => {
+    this.roleId = roleId;
+  })
+  this.route.params.subscribe(params => {
+    this.doctorId = parseInt(params['id']); 
+  })
   }
+  doctorId: number | undefined;
+  userId: number | undefined;
   weekdays: string[] = ['(ორშ)', '(სამ)', '(ოთხ)', '(ხუთ)', '(პარ)', '(შაბ)', '(კვი)'];
   currentMonth='';
   currentYear=0;
@@ -21,6 +36,7 @@ export class CalendarComponent implements OnInit {
   ];
   currentWeek: { day: string; date: number }[] = [];
   now:Date =new Date();
+  roleId: string | null = null;
   currentWeekStart = new Date(this.now.setDate(this.now.getDate()));
 
   //for modal
@@ -138,38 +154,77 @@ updateCalendar() {
     console.log('Sending date and time to API:', date);
   }
   openModal(event: MouseEvent, day: { day: string; date: number }, hour: string) {
-    // Get button position
     const buttonRect = (event.target as HTMLElement).getBoundingClientRect();
-    
-    this.modalPosition.top = buttonRect.top + window.scrollY + 50; // 40px offset for better visibility
-    this.modalPosition.left = buttonRect.left + window.scrollX + 50;
-    
+    const modalWidth = 420; // Modal width
+    const modalHeight = 263; // Modal height
+    const viewportWidth = window.innerWidth;
+  
+    // Default position to the right and below the button
+    let top = buttonRect.top + window.scrollY + 50; // Offset for better visibility
+    let left = buttonRect.left + window.scrollX + 50;
+  
+    // Check if modal exceeds the right edge of the viewport
+    if (left + modalWidth > viewportWidth) {
+      left = buttonRect.left + window.scrollX - modalWidth - 10; // Adjust to the left of the button with 10px padding
+    }
+  
+    // Set the modal position
+    this.modalPosition = { top, left };
     this.selectedDay = day;
     this.selectedHour = hour;
     this.showModal = true;
   }
   submitReservation() {
-    const reservationData = {
-      date: `${this.selectedDay?.date}-${this.currentMonth}-${this.currentYear}`,
-      time: this.selectedHour,
-      description: this.reservationDescription
+    if (!this.selectedDay || !this.selectedHour) {
+      console.error('Day or hour not selected');
+      return;
     }
+  
+    // Get the month index from the Months array
+    const monthIndex = this.Months.indexOf(this.currentMonth); // Get index of the current month (0-11)
+    if (monthIndex === -1) {
+      console.error('Invalid month:', this.currentMonth);
+      return;
+    }
+  
+    // Construct the full date and time
+    const selectedDate = new Date(
+      this.currentYear,
+      monthIndex,
+      this.selectedDay.date
+    );
+  
+    // Parse the hour and minute from the selectedHour
+    const [hour, minute] = this.selectedHour.split(':').map(Number);
+    selectedDate.setHours(hour+4, minute || 0); // Default to 0 if minute is undefined
+  
+    // Convert to ISO 8601 format
+    const bookingDate = selectedDate.toISOString();
+    this.userService.currentUserData.subscribe((userdata)=>{
+      this.userId=userdata?.id;
+    })
+    const reservationData = new booking(
+      this.userId,
+      this.doctorId,
+      selectedDate,
+      this.reservationDescription
+    );
+  
     console.log('Sending reservation data:', reservationData);
+  
+    // Send the reservation data to the API
     this.sendReservationToApi(reservationData);
-    this.showModal = false; // Close the modal after submitting
+  
+    // Close modal and reset description
+    this.showModal = false;
     this.reservationDescription = '';
-
-    
   }
-  sendReservationToApi(data: any) {
-    // Send data to the API
-    // Example of sending data:
-    // this.http.post('/api/reservations', data).subscribe(response => {
-    //   console.log('Reservation saved:', response);
-    // });
+  
+  sendReservationToApi(booking:booking) {
+    this.bookinService.Add_booking(booking).subscribe((res)=>{
+      if(res){
+        console.log(res);
+      }
+    });
   }
 }
-
-
-
-

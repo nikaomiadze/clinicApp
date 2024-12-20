@@ -46,6 +46,8 @@
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-self: center;
 }
 
 /* Style the doctor image */

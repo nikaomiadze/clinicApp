@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TokenService } from '../token.service';
 import { BookingService } from '../booking.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,10 +9,11 @@ import { userInfo } from 'os';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit {
-  constructor(private tokenService:TokenService,private bookinService:BookingService,private route:ActivatedRoute,private userService:UserService){}
+  constructor(private tokenService:TokenService,private bookingService:BookingService,private route:ActivatedRoute,private userService:UserService){}
   ngOnInit(): void {
   this.updateCalendar();
   this.generateCurrentWeek();
@@ -21,6 +22,8 @@ export class CalendarComponent implements OnInit {
   })
   this.route.params.subscribe(params => {
     this.doctorId = parseInt(params['id']); 
+    this.fetchDoctorBookings(this.doctorId);
+
   })
   }
   doctorId: number | undefined;
@@ -34,6 +37,7 @@ export class CalendarComponent implements OnInit {
     'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო',
     'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
   ];
+  reservations: { date: Date; hour: string }[] = []; 
   currentWeek: { day: string; date: number }[] = [];
   now:Date =new Date();
   roleId: string | null = null;
@@ -52,32 +56,27 @@ updateCalendar() {
   this.currentMonth = this.Months[monthIndex];
   this.currentYear = this.currentWeekStart.getFullYear();
 }
-  generateCurrentWeek() {
-    const startDate = new Date(this.currentWeekStart);
-    this.currentWeek = Array(7)
-      .fill(null)
-      .map((_, index) => {
-        const currentDate = new Date(startDate);
-        currentDate.setDate(startDate.getDate() + index);
-        return {
-          day: this.weekdays[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1], // Map day index (Sunday=0) to Georgian weekdays
-          date: currentDate.getDate()
-        };
-      });
-  }
-  logDate(day: { day: string; date: number }, time: string): void {
-    const now = new Date(this.currentWeekStart);
-    now.setDate(this.currentWeekStart.getDate() + this.currentWeek.findIndex(d => d.date === day.date));
-  
-    // Format the full date-time string
-    const dateTime = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${time}`;
-    
-    console.log('Full Date-Time:', dateTime);
-  
-    // Optionally send the date and time to the API
-    this.sendDateTimeToApi(day, now.getMonth() + 1, now.getFullYear(), time);
+generateCurrentWeek() {
+  const startDate = new Date(this.currentWeekStart);
+  this.currentWeek = Array(7)
+    .fill(null)
+    .map((_, index) => {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + index);
+      return {
+        day: this.weekdays[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1], // Map day index (Sunday=0) to Georgian weekdays
+        date: currentDate.getDate(),
+      };
+    });
 
-  }
+  // Deduplication logic
+  this.currentWeek = this.currentWeek.filter(
+    (value, index, self) =>
+      index === self.findIndex((t) => t.day === value.day && t.date === value.date)
+  );
+  console.log('Filtered currentWeek:', this.currentWeek);
+
+}
   isPastDate(day: { day: string; date: number }): boolean {
     const today = new Date();
     const calendarDate = new Date(this.currentWeekStart);
@@ -99,6 +98,12 @@ updateCalendar() {
         };
       });
       this.updateCalendar();
+  }
+  isWeekend(day: { day: string; date: number }): boolean {
+    const date = new Date(this.currentWeekStart);
+    date.setDate(this.currentWeekStart.getDate() + this.currentWeek.findIndex(d => d.date === day.date));
+    const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
+    return dayOfWeek === 0 || dayOfWeek === 6;
   }
   previousWeek(){
     this.currentWeekStart.setDate(this.currentWeekStart.getDate() - 7); // Move start date forward by 7 days
@@ -221,10 +226,58 @@ updateCalendar() {
   }
   
   sendReservationToApi(booking:booking) {
-    this.bookinService.Add_booking(booking).subscribe((res)=>{
+    this.bookingService.Add_booking(booking).subscribe((res)=>{
       if(res){
         console.log(res);
+        if (this.doctorId !== undefined) {
+          this.fetchDoctorBookings(this.doctorId); // Refresh reservations after adding the booking
+        } else {
+          console.error('doctorId is undefined, cannot fetch bookings');
+        }
       }
     });
   }
+  fetchDoctorBookings(doctorId: number): void {
+    this.bookingService.Get_doctor_booking(doctorId).subscribe(
+      (data) => {
+        this.reservations = data.map((res: any) => {
+          const bookingDate = new Date(res.booking_date);
+          return {
+            date: bookingDate,
+            hour: `${bookingDate.getHours()}:00-${bookingDate.getHours() + 1}:00`
+          };
+        });
+        console.log('Reservations for doctor:', this.reservations);
+      },
+      (error) => {
+        console.error('Error fetching doctor bookings:', error);
+      }
+    );
+  }
+
+  // Check if a button is reserved
+  isButtonReserved(date: number, hour: string): boolean {
+    if (!this.reservations || this.reservations.length === 0) {
+      return false; // No reservations to compare with
+    }
+  
+    // Derive the month index from the currentMonth
+    const monthIndex = this.Months.indexOf(this.currentMonth); // Get the zero-based index of the current month
+    if (monthIndex === -1) {
+      console.error('Invalid month:', this.currentMonth);
+      return false;
+    }
+  
+    // Construct the full date using the current year and month
+    const selectedDate = new Date(this.currentYear, monthIndex, date+1);
+    const dateStr = selectedDate.toISOString().split('T')[0];
+  
+    // Check if any reservation matches the date and hour
+    return this.reservations.some(
+      (reservation) =>
+        reservation.date.toISOString().split('T')[0] === dateStr &&
+        reservation.hour === hour
+    );
+  }
+  
 }

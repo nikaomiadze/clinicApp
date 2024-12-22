@@ -17,4 +17,7 @@ export class BookingService {
      
       return this.http.post<any>("https://localhost:7082/add-booking",Booking,httpOptions);
     }
+  Get_doctor_booking(doctorid:number):Observable<any>{
+    return this.http.get<any>(`https://localhost:7082/get_doctor_booking/${doctorid}`);
+  }
 }

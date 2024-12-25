@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {jwtDecode} from 'jwt-decode';
 import { DoctorService } from '../doctor.service';
+import { TokenService } from '../token.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit{
   loginForm!:FormGroup;
   incorectdata: boolean = false;
 
-  constructor(private userservice: UserService, private formbuilder: FormBuilder,private router:Router,private doctorservice:DoctorService) {}
+  constructor(private userservice: UserService, private formbuilder: FormBuilder,private router:Router,private doctorservice:DoctorService,private tokenService:TokenService) {}
 //login window
   @Output() close = new EventEmitter<void>();
   closeModal() {
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit{
         // Save the access token in local storage
         console.log(res.accessToken);
         localStorage.setItem("accessToken", res.accessToken);
+        this.tokenService.setToken(res.accessToken);
+
     
         // Extract user ID and role ID from token
         const user_id = this.getUserIdFromToken(res.accessToken);

@@ -15,16 +15,21 @@ import { userInfo } from 'os';
 export class CalendarComponent implements OnInit {
   constructor(private tokenService:TokenService,private bookingService:BookingService,private route:ActivatedRoute,private userService:UserService){}
   ngOnInit(): void {
-  this.updateCalendar();
-  this.generateCurrentWeek();
-  this.tokenService.roleId$.subscribe(roleId => {
-    this.roleId = roleId;
-  })
-  this.route.params.subscribe(params => {
-    this.doctorId = parseInt(params['id']); 
-    this.fetchDoctorBookings(this.doctorId);
-
-  })
+    this.updateCalendar();
+    this.generateCurrentWeek();
+    this.tokenService.roleId$.subscribe(roleId => {
+      this.roleId = roleId ? roleId.toString() : null;
+    })
+    this.route.params.subscribe(params => {
+      this.doctorId = parseInt(params['id']); 
+      this.fetchDoctorBookings(this.doctorId);
+    });
+  
+    // Initialize userId by subscribing to currentUserData
+    this.userService.currentUserData.subscribe(userData => {
+      this.userId = userData?.id;
+      console.log("User ID:", this.userId); // Log to verify if it's correctly assigned
+    });
   }
   doctorId: number | undefined;
   userId: number | undefined;
@@ -37,7 +42,9 @@ export class CalendarComponent implements OnInit {
     'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო',
     'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
   ];
-  reservations: { date: Date; hour: string }[] = []; 
+  reservations: {
+    userId: number; date: Date; hour: string 
+}[] = []; 
   currentWeek: { day: string; date: number }[] = [];
   now:Date =new Date();
   roleId: string | null = null;
@@ -244,7 +251,9 @@ generateCurrentWeek() {
           const bookingDate = new Date(res.booking_date);
           return {
             date: bookingDate,
-            hour: `${bookingDate.getHours()}:00-${bookingDate.getHours() + 1}:00`
+            hour: `${bookingDate.getHours()}:00-${bookingDate.getHours() + 1}:00`,
+            userId: res.userId,
+              // Assuming userId is part of the response
           };
         });
         console.log('Reservations for doctor:', this.reservations);
@@ -254,6 +263,7 @@ generateCurrentWeek() {
       }
     );
   }
+  
 
   // Check if a button is reserved
   isButtonReserved(date: number, hour: string): boolean {
@@ -276,7 +286,19 @@ generateCurrentWeek() {
     return this.reservations.some(
       (reservation) =>
         reservation.date.toISOString().split('T')[0] === dateStr &&
-        reservation.hour === hour
+        reservation.hour === hour 
+
+    );
+  }
+  isUserBooking(date: number, hour: string): boolean {
+    const selectedDate = new Date(this.currentYear, this.Months.indexOf(this.currentMonth), date+1);
+    const dateStr = selectedDate.toISOString().split('T')[0];
+  
+    return this.reservations.some(
+      (reservation) => 
+        reservation.date.toISOString().split('T')[0] === dateStr &&
+        reservation.hour === hour &&
+        reservation.userId === this.userId,
     );
   }
   

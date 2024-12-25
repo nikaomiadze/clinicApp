@@ -63,6 +63,7 @@ nav ul li a {
   flex-shrink: 0;
   border-radius: 25px;
   background: #F0FAFF;
+  color: black;
   border: 0px;
   margin-left: 10px;
   font-weight: 400;

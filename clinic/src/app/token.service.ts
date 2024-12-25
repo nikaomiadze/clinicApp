@@ -1,20 +1,42 @@
 import { Injectable } from '@angular/core';
+import {jwtDecode} from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
-  private roleIdSubject = new BehaviorSubject<string | null>(null); // Allow null
-  roleId$ = this.roleIdSubject.asObservable();
+  private tokenKey: string | null = localStorage.getItem('accessToken');
+  private roleIdSubject = new BehaviorSubject<string | null>(null);
+  roleId$ = this.roleIdSubject.asObservable(); // Observable to subscribe to roleId changes
 
-  constructor() { }
-
-  setRoleId(roleId: string | null): void {  // Accept string | null
-    this.roleIdSubject.next(roleId);
+  constructor() {
+    this.decodeAndSetRole();
   }
 
-  getRoleId(): string | null {
-    return this.roleIdSubject.getValue();
+  private decodeAndSetRole(): void {
+    if (this.tokenKey) {
+      try {
+        const decodedToken: any = jwtDecode(this.tokenKey);
+        const roleId = decodedToken?.roleID || null;
+        this.roleIdSubject.next(roleId); // Update the BehaviorSubject
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    } else {
+      console.warn('No access token found in localStorage.');
+    }
+  }
+
+  setToken(token: string): void {
+    this.tokenKey = token;
+    localStorage.setItem('accessToken', token);
+    this.decodeAndSetRole();
+  }
+
+  clearToken(): void {
+    this.tokenKey = null;
+    localStorage.removeItem('accessToken');
+    this.roleIdSubject.next(null);
   }
 }

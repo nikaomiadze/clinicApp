@@ -15,11 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router,private tokenService:TokenService) {}
   ngOnInit(): void {
-    // Simulate getting the role_id from a login or token storage
-    const roleId = this.getUserRole_idFromToken(this.token);
-
-    // Store the role_id in the TokenService
-    this.tokenService.setRoleId(roleId);
+    
   }
   
     getUserRole_idFromToken(token: string): string | null {

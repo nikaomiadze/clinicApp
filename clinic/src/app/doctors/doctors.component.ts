@@ -18,6 +18,7 @@ export class DoctorsComponent implements OnInit {
   fullDoctorList: any[] = []; 
   @Input() show_more_btn: boolean = true; // Receive value from AdminPageComponent
   roleId: string | null = null;
+  
   ngOnChanges() {
     console.log('Show More Button State in DoctorsComponent:', this.show_more_btn);
   }  ngOnInit(): void {

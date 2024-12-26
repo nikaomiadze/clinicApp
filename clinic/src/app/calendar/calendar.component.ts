@@ -43,8 +43,9 @@ export class CalendarComponent implements OnInit {
     'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
   ];
   reservations: {
-    userId: number; date: Date; hour: string 
-}[] = []; 
+    userId: number; date: Date; hour: string;
+    reservationId: number; 
+  }[] = []; 
   currentWeek: { day: string; date: number }[] = [];
   now:Date =new Date();
   roleId: string | null = null;
@@ -253,6 +254,7 @@ generateCurrentWeek() {
             date: bookingDate,
             hour: `${bookingDate.getHours()}:00-${bookingDate.getHours() + 1}:00`,
             userId: res.userId,
+            reservaionId: res.id
               // Assuming userId is part of the response
           };
         });
@@ -290,16 +292,37 @@ generateCurrentWeek() {
 
     );
   }
-  isUserBooking(date: number, hour: string): boolean {
-    const selectedDate = new Date(this.currentYear, this.Months.indexOf(this.currentMonth), date+1);
+  isUserBooking(date: number, hour: string): { userId: number; reservationId: number } | null {
+    const selectedDate = new Date(this.currentYear, this.Months.indexOf(this.currentMonth), date + 1);
     const dateStr = selectedDate.toISOString().split('T')[0];
-  
-    return this.reservations.some(
-      (reservation) => 
-        reservation.date.toISOString().split('T')[0] === dateStr &&
-        reservation.hour === hour &&
-        reservation.userId === this.userId,
+    const reservation = this.reservations.find(
+        (reservation) =>
+            reservation.date.toISOString().split('T')[0] === dateStr &&
+            reservation.hour === hour &&
+            reservation.userId === this.userId
     );
+    console.log(`Checked reservation for date ${dateStr} and hour ${hour}:`, reservation);
+    return reservation || null;
+}
+
+  
+  deleteReservation(reservationId: number | undefined): void {
+    if (reservationId !== undefined) {
+      this.bookingService.Delete_booking(reservationId).subscribe(
+        (response) => {
+          console.log('Reservation deleted successfully:', response);
+          // Optionally refresh reservations after deletion
+          if (this.doctorId !== undefined) {
+            this.fetchDoctorBookings(this.doctorId);
+          }
+        },
+        (error) => {
+          console.error('Error deleting reservation:', error);
+        }
+      );
+    } else {
+      console.log('No reservation to delete');
+    }
   }
   
 }

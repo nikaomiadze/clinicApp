@@ -141,8 +141,9 @@
     padding: 0px;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;;
-    align-content: center;
-
+    align-content: center;   
+    position: relative; /* Make the cell a positioning container */
+    vertical-align: middle; /* Align content vertically */
   }
   .booking-btn{
     width: 100%;
@@ -277,6 +278,24 @@
   .user-booking {
     background: #DAFAEE !important;
     color: #3ACF99 !important;
+    }
+    .delete-btn {
+      width: 18px;
+      height: 18px;
+      background-color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 18px;
+      position: absolute; 
+      top: 5px; 
+      right: 5px; 
+      z-index: 10; 
+      display: flex;
+      align-items: center;
+    }
+    
+    .delete-btn:hover {
+      background-color: gray;
     }
   
   

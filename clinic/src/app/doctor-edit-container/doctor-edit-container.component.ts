@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DoctorService } from '../doctor.service';
 import { AdminService } from '../admin.service';
@@ -22,7 +22,11 @@ export class DoctorEditContainerComponent implements OnInit {
   newPassword: string = '';
   newEmail:string='';
   newPerson_id:string='';
+  @Output() deleteButtonClicked = new EventEmitter<void>();  
 
+  onDeleteButtonClick() {
+    this.deleteButtonClicked.emit();
+  }
   constructor(private route:ActivatedRoute,private doctorService:DoctorService,private adminService:AdminService){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {

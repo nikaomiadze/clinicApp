@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
 })
 
 export class DoctorEditpageComponent {
+  deletebtn_for_admin: boolean = false;  // Variable to control delete button state
 
+  // Method to handle delete button click from child (doctor-info)
+  handleDeleteButtonClick() {
+    this.deletebtn_for_admin = !this.deletebtn_for_admin;
+    }  
 }

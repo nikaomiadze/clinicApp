@@ -21,7 +21,7 @@ export class BookingService {
     return this.http.get<any>(`https://localhost:7082/get_doctor_booking/${doctorid}`);
   }
   Delete_booking(reservationId: number): Observable<any> {
-    return this.http.delete<any>(`/api/bookings/${reservationId}`);
+    return this.http.delete<any>(`https://localhost:7082/delete_booking_by_id/${reservationId}`,{ responseType: 'text' as 'json'});
   }
   
 }

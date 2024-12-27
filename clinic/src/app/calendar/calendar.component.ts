@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { TokenService } from '../token.service';
 import { BookingService } from '../booking.service';
 import { ActivatedRoute } from '@angular/router';
@@ -58,7 +58,9 @@ export class CalendarComponent implements OnInit {
   modalPosition = { top: 0, left: 0 };
   selectedDay: { day: string; date: number } | null = null;
   selectedHour: string = '';
-  
+
+  @Input() deletebtn_for_admin: boolean = false;
+
 updateCalendar() {
   const monthIndex = this.currentWeekStart.getMonth(); // Get month as 0-11
   this.currentMonth = this.Months[monthIndex];
@@ -250,6 +252,7 @@ generateCurrentWeek() {
       (data) => {
         this.reservations = data.map((res: any) => {
           const bookingDate = new Date(res.booking_date);
+          console.log('Reservations for doctor:', res.id);
           return {
             date: bookingDate,
             hour: `${bookingDate.getHours()}:00-${bookingDate.getHours() + 1}:00`,
@@ -258,6 +261,7 @@ generateCurrentWeek() {
               // Assuming userId is part of the response
           };
         });
+        
         console.log('Reservations for doctor:', this.reservations);
       },
       (error) => {
@@ -268,50 +272,77 @@ generateCurrentWeek() {
   
 
   // Check if a button is reserved
-  isButtonReserved(date: number, hour: string): boolean {
+  isButtonReserved(date: number, hour: string): { userId: number; reservationId: number } | null {
     if (!this.reservations || this.reservations.length === 0) {
-      return false; // No reservations to compare with
+      return null; // No reservations available
     }
   
     // Derive the month index from the currentMonth
-    const monthIndex = this.Months.indexOf(this.currentMonth); // Get the zero-based index of the current month
+    const monthIndex = this.Months.indexOf(this.currentMonth);
     if (monthIndex === -1) {
       console.error('Invalid month:', this.currentMonth);
-      return false;
+      return null; // Invalid month index
     }
   
     // Construct the full date using the current year and month
-    const selectedDate = new Date(this.currentYear, monthIndex, date+1);
+    const selectedDate = new Date(this.currentYear, monthIndex, date + 1);
     const dateStr = selectedDate.toISOString().split('T')[0];
   
-    // Check if any reservation matches the date and hour
-    return this.reservations.some(
+    // Find the reservation that matches the date, hour, and userId
+    const reservation = this.reservations.find(
       (reservation) =>
         reservation.date.toISOString().split('T')[0] === dateStr &&
-        reservation.hour === hour 
-
+        reservation.hour === hour
     );
+  
+    return reservation || null;
   }
+  
   isUserBooking(date: number, hour: string): { userId: number; reservationId: number } | null {
     const selectedDate = new Date(this.currentYear, this.Months.indexOf(this.currentMonth), date + 1);
     const dateStr = selectedDate.toISOString().split('T')[0];
+  
+  
     const reservation = this.reservations.find(
-        (reservation) =>
-            reservation.date.toISOString().split('T')[0] === dateStr &&
-            reservation.hour === hour &&
-            reservation.userId === this.userId
-    );
-    console.log(`Checked reservation for date ${dateStr} and hour ${hour}:`, reservation);
+      (reservation) =>
+        reservation.date.toISOString().split('T')[0] === dateStr &&
+        reservation.hour === hour &&
+        reservation.userId === this.userId
+    );  
     return reservation || null;
-}
+  }
+  logAndDelete(date: number, hour: string): void {
+    let matchedBooking;
 
+    if(this.roleId==='1'){
+    matchedBooking = this.isUserBooking(date, hour);
+    }else if(this.roleId==='2'||this.roleId==='3'){
+    matchedBooking=this.isButtonReserved(date,hour);
+    }
+    
+    console.log('Matched booking:', matchedBooking);
+  
+    if (matchedBooking) {
+      // Dynamically access the property to handle the typo
+      const reservationId = (matchedBooking as any).reservationId ?? (matchedBooking as any).reservaionId;
+      if (reservationId) {
+        this.deleteReservation(reservationId);
+      } else {
+        console.error('No valid reservationId or reservaionId found in matchedBooking:', matchedBooking);
+      }
+    } else {
+      console.log('No matching reservation to delete.');
+    }
+  }
+  
+  
   
   deleteReservation(reservationId: number | undefined): void {
     if (reservationId !== undefined) {
       this.bookingService.Delete_booking(reservationId).subscribe(
         (response) => {
           console.log('Reservation deleted successfully:', response);
-          // Optionally refresh reservations after deletion
+          // Refresh reservations
           if (this.doctorId !== undefined) {
             this.fetchDoctorBookings(this.doctorId);
           }

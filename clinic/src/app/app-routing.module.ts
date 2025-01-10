@@ -9,6 +9,7 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { RoleGuard } from './role.guard';
 import { DoctorEditpageComponent } from './doctor-edit-page/doctor-edit-page.component';
 import { BookingPageComponent } from './booking-page/booking-page.component';
+import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
   {path:"user-register",component:UserRegisterComponent},
@@ -16,7 +17,10 @@ const routes: Routes = [
   {path:"admin-page",component:AdminPageComponent,canActivate:[RoleGuard]},
   {path: 'edit-doctor/:id', component: DoctorEditpageComponent,canActivate:[RoleGuard] },
   {path:"user-page",component:UserProfileComponent},
-  {path:'booking-page/:id',component:BookingPageComponent}
+  {path:'booking-page/:id',component:BookingPageComponent},
+  {path: 'doctor-register',component:DoctorRegisterComponent},
+  {path: 'category-page',component:CategoryComponent},
+  {path: 'doctors',component:AdminPageComponent}
 
 ];
 

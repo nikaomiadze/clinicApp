@@ -1,113 +1,113 @@
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h2 {
-    color: #18A4E1;
-    font-family: FiraGO;
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-  
-  form {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .form-column {
-    flex: 1;
-    margin: 0 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  select option{
-    padding: 10px; /* Padding inside each option */
-    font-size: 16px; /* Font size */
-    background-color: #fff; /* Background color */
-    color: #053354; 
-  }
-  select option:hover {
-    background-color: #f0f8ff; /* Highlight color */
-    color: #000; /* Text color on hover */
-  }
-  select::after {
-    content: '';
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 74px;
+}
+.form-row{
+  display: flex;
+  gap: 40px;
+
+}
+.form-column{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+h2{
+  align-self: flex-start;
+  color: #18A4E1;
+  font-family: FiraGO;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form-group input,select{
+  width: 480px;
+height: 50px;
+flex-shrink: 0;
+border-radius: 50px;
+border: 1px solid #ECF2F8;
+padding-left: 15px;
+}
+.form-group label{
+  margin-left: 20px;
+  color: #053354;
+font-family: FiraGO;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+}
+.form-group-submit-button{
+  width: 486px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-top: 31px;
+
+}
+.form-group-submit-button button{
+  width: 180px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: #053354;
+  color: #FFF;
+  font-family: FiraGO;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0px;
+  cursor: pointer;
+}
+
+
+.custom-file-input {
+  position: relative;
+  display: inline-block;
+  align-content: flex-end;
+  width: 480px;
+height: 50px;
+flex-shrink: 0;
+border-radius: 50px;
+border: 1px solid #ECF2F8;
+}
+
+.custom-file-input input[type="file"] {
+  width: 480px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: transparent; /* Hides the "No file chosen" text */
+}
+
+.custom-file-input input[type="file"]::file-selector-button {
+  display: none; /* Hides the default file selection button */
+}
+
+.custom-file-input img {
   position: absolute;
   top: 50%;
-  right: 15px;
+  right: 10px; 
   transform: translateY(-50%);
-  border: 6px solid transparent;
-  border-top-color: #053354;
-  pointer-events: none;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="file"],
-  .form-group select {
-    width: 380px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 50px;
-    border: 1px solid #ECF2F8;
-  }
-  
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus,
-  input[type="file"]:focus, 
-  .form-group select:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  button {
-    width: 180px;
-    height: 50px;
-    flex-shrink: 0;
-    border-radius: 50px;
-    background: #053354;
-    color: #FFF;
-    font-family: FiraGO;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    align-self: flex-end;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .submit-button {
-    margin-top: 30px;
-  }
-  .button:disabled{
-    background-color: #ccc;
-    
-  }
-  
+  width: 20px;
+  height: 20px;
+  pointer-events: none; /* Ensures the icon doesn't block input interaction */
+}

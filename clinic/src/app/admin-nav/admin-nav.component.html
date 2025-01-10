@@ -1,9 +1,9 @@
 <div class="nav">
 <div class="admin-nav">
     <img src="img/menu.png" alt="menu">
-    <a (click)="onNavClick('register')" [ngClass]="{'active-link': activeTab === 'register'}">რეგისტრაცია</a>
-    <a (click)="onNavClick('category')" [ngClass]="{'active-link': activeTab === 'category'}">კატეგორიები</a>
-    <a (click)="onNavClick('doctors')" [ngClass]="{'active-link': activeTab === 'doctors'}">ექიმები</a>
+    <a routerLink="/doctor-register" routerLinkActive="active-link">რეგისტრაცია</a>
+    <a routerLink="/category-page" routerLinkActive="active-link">კატეგორიები</a>
+    <a routerLink="/doctors" routerLinkActive="active-link">ექიმები</a>
 </div>
 <div class="nav-btn">
     <button>ექიმი</button>

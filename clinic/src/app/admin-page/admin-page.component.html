@@ -1,6 +1,6 @@
+<app-admin-nav></app-admin-nav>
 <div class="admin-page">
     <!-- Admin Navigation -->
-<app-admin-nav (navChange)="onNavChange($event)"></app-admin-nav>
     <!-- Conditional Components -->
     <div *ngIf="doctors_clicked" class="other-component">
         <app-category-list (showMoreChange)="onShowMoreChange($event)"></app-category-list>

@@ -1,3 +1,4 @@
+<app-admin-nav ></app-admin-nav>
 <div id="doctor-register" class="doctor-register">
   <div class="container">
     <h2>რეგისტრაცია</h2>
@@ -28,13 +29,17 @@
 
           <div class="form-group">
             <label for="photo">ფოტოს ატვირთვა</label>
-            <input
-              type="file"
-              id="photo"
-              name="profile_img"
-              (change)="onPictureSelected($event)"
-            />
+            <div class="custom-file-input">
+              <input
+                type="file"
+                id="photo"
+                name="profile_img"
+                (change)="onPictureSelected($event)"
+              />
+              <img src="img/upload-icon.png" alt="Upload Icon" />
+            </div>
           </div>
+          
         </div>
 
         <!-- Second Column -->
@@ -61,12 +66,15 @@
 
           <div class="form-group">
             <label for="cv">CV</label>
+            <div class="custom-file-input">
             <input
               type="file"
               id="cv"
               name="cv"
               (change)="onCvSelected($event)"
             />
+            <img src="img/cv-upload-icon.png" alt="Upload Icon" />
+            </div>
           </div>
         </div>
 
@@ -92,7 +100,7 @@
     </select>
           </div>
 
-          <div class="form-group submit-button">
+          <div class="form-group-submit-button">
             <button type="submit" [disabled]="!registerForm.valid">
               რეგისტრაცია
             </button>

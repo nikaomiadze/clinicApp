@@ -1,3 +1,77 @@
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 600px; /* Adjust height as needed */
+  background-size: cover;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  
+}
+
+/* Blur Overlay */
+.blur-overlay {
+  position: absolute;
+  border-radius: 0px 50px 50px 0px;
+  background: rgba(5, 51, 84, 0.25);
+  backdrop-filter: blur(2px);
+  width: 1087px;
+  height: 600px;
+  flex-shrink: 0;
+  margin-right: 833px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Content inside the blur area */
+.content {
+  color: #ffffff;
+  text-align: left;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+}
+
+.content h1 {
+  color: #FFF;
+  font-family: FiraGO;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* Location Button */
+.location-button {
+  width: 370px;
+height: 65px;
+flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff; /* Button color */
+  color: #053354;
+  font-family: FiraGO;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  border-radius: 50px;
+ 
+  cursor: pointer;
+}
+
+.location-button img {
+  width: 30px;
+height: 30px;
+flex-shrink: 0;
+  margin-right: 10px;
+}
+
 .main-page{
   display: flex;
   margin: 0px;
